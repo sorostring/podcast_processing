@@ -152,7 +152,7 @@ python3 scripts/WSJ_bold_leading_speakers.py podcast_WSN.md \
 现在就需要有提示词了，我们进入到 chatGPT 环节了，因为之前我们通过脚本和html文件已经完善了我们的markdown文件，所以现在可以进入到和 chatGPT 交互的环节了。
 那么就要有提示词。
 
-- 提示词Version01
+> 提示词Version01
 
 我在通过podcast的方式学习英文，现在我要处理podcast的transcript，在读这些 transcript过程中，总会有不明白的单词和不明白的表达，所以需要你帮我批量处理。我已经整理好了，这些 transcript是以 markdownd文件的形式存在的。这些markdown文件的格式都是很简单的，顶多有标题和正文。在每个正文段落之后，所出现的以[COLLECTED]开始的那个段落，就是需要你帮我处理的。你需要做的是：
 
