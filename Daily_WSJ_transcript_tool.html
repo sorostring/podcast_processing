@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WSJ Transcript Tool</title>
+    <style>
+      :root {
+        --bg: #edf2ec;
+        --panel: #fbfcf9;
+        --text: #243028;
+        --muted: #65746b;
+        --line: #d7dfd4;
+        --accent: #5f7867;
+        --accent-strong: #476553;
+        --button-text: #f7faf7;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Arial, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", sans-serif;
+      }
+
+      .page {
+        width: min(1120px, calc(100vw - 24px));
+        margin: 16px auto 28px;
+      }
+
+      .header {
+        margin-bottom: 18px;
+        padding: 24px 24px 18px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        line-height: 1.1;
+      }
+
+      .intro {
+        margin: 0;
+        max-width: 60em;
+        color: #445149;
+        line-height: 1.7;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+        gap: 16px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+
+      .controls,
+      .workspace {
+        padding: 20px;
+      }
+
+      .section-title {
+        margin: 0 0 14px;
+        font-size: 0.9rem;
+        color: var(--accent);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .field {
+        margin-bottom: 16px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+        font-weight: 700;
+      }
+
+      .hint {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.5;
+      }
+
+      input[type="text"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px 13px;
+        border: 1px solid #c8d2c5;
+        border-radius: 0;
+        background: #ffffff;
+        color: var(--text);
+        font: inherit;
+      }
+
+      textarea {
+        min-height: 180px;
+        resize: vertical;
+        line-height: 1.65;
+      }
+
+      .small-textarea {
+        min-height: 120px;
+      }
+
+      .checkbox-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 14px 0 18px;
+      }
+
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      button,
+      .file-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 0 16px;
+        border: 1px solid var(--accent-strong);
+        border-radius: 0;
+        background: var(--accent-strong);
+        color: var(--button-text);
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      button.secondary,
+      .file-button.secondary {
+        background: transparent;
+        color: var(--accent-strong);
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      .status {
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .workspace-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .workspace-top p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .preview {
+        min-height: 420px;
+      }
+
+      @media (max-width: 860px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="header">
+        <p class="eyebrow">Local Web Tool</p>
+        <h1>WSJ Transcript Tool</h1>
+        <p class="intro">
+          这个网页小工具专门处理 transcript。当前版本先支持一件事：把你指定的人名在
+          <code>Name:</code> 这种段首格式里改成 Markdown 粗体，比如
+          <code>**Imani Mosise:**</code>。也支持把独立占一行的文本提升成
+          <code>##</code> 二级标题。整个处理都在浏览器本地完成，不需要后端。
+        </p>
+      </header>
+
+      <section class="layout">
+        <aside class="panel controls">
+          <h2 class="section-title">Controls</h2>
+
+          <div class="field">
+            <label for="modeSelect">处理模式</label>
+            <select id="modeSelect">
+              <option value="bold-speakers">WSJ: 段首 Name: 加粗</option>
+              <option value="promote-standalone">Daily: 独立行提升为 ## 标题</option>
+            </select>
+            <div class="hint" id="modeHint">
+              当前模式会把你指定的人名在 <code>Name:</code> 这种段首格式里改成 Markdown 粗体。
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="fileInput">上传 Markdown 文件</label>
+            <div class="button-row">
+              <label class="file-button" for="fileInput">选择文件</label>
+              <button class="secondary" type="button" id="loadSample">载入示例</button>
+            </div>
+            <input id="fileInput" type="file" accept=".md,.txt,text/markdown,text/plain" />
+            <div class="hint" id="fileName">当前没有选择文件。</div>
+          </div>
+
+          <div class="field">
+            <label for="speakerList" id="rulesLabel">需要处理的人名</label>
+            <textarea
+              id="speakerList"
+              class="small-textarea"
+              placeholder="一行一个，例如：&#10;Imani Mosise&#10;David Sanger"
+            ></textarea>
+            <div class="hint" id="rulesHint">
+              只有这些名字在段首以 <code>Name:</code> 形式出现时才会被加粗。
+            </div>
+          </div>
+
+          <div class="checkbox-row">
+            <input id="ignoreCase" type="checkbox" />
+            <label for="ignoreCase">忽略大小写</label>
+          </div>
+
+          <div class="field">
+            <label for="inputText">输入 Markdown</label>
+            <textarea id="inputText" placeholder="你也可以直接把 markdown 粘贴到这里。"></textarea>
+          </div>
+
+          <div class="button-row">
+            <button type="button" id="runButton">处理文本</button>
+            <button class="secondary" type="button" id="downloadButton">下载结果</button>
+            <button class="secondary" type="button" id="copyButton">复制结果</button>
+          </div>
+
+          <p class="status" id="status">
+            还没有开始处理。先上传文件或粘贴文本，再输入 speaker 名单。
+          </p>
+        </aside>
+
+        <section class="panel workspace">
+          <div class="workspace-top">
+            <h2 class="section-title">Output Preview</h2>
+            <p id="outputMeta">输出文件名会在这里显示。</p>
+          </div>
+          <textarea id="outputText" class="preview" placeholder="处理后的内容会显示在这里。"></textarea>
+        </section>
+      </section>
+    </main>
+
+    <script>
+      const fileInput = document.getElementById("fileInput");
+      const fileName = document.getElementById("fileName");
+      const modeSelect = document.getElementById("modeSelect");
+      const modeHint = document.getElementById("modeHint");
+      const rulesLabel = document.getElementById("rulesLabel");
+      const rulesHint = document.getElementById("rulesHint");
+      const speakerList = document.getElementById("speakerList");
+      const ignoreCase = document.getElementById("ignoreCase");
+      const inputText = document.getElementById("inputText");
+      const outputText = document.getElementById("outputText");
+      const outputMeta = document.getElementById("outputMeta");
+      const status = document.getElementById("status");
+      const runButton = document.getElementById("runButton");
+      const downloadButton = document.getElementById("downloadButton");
+      const copyButton = document.getElementById("copyButton");
+      const loadSample = document.getElementById("loadSample");
+
+      let currentFileName = "";
+
+      function normalize(value, useIgnoreCase) {
+        return useIgnoreCase ? value.toLocaleLowerCase() : value;
+      }
+
+      function getSpeakers() {
+        return speakerList.value
+          .split(/\r?\n/)
+          .map((line) => line.trim())
+          .filter(Boolean);
+      }
+
+      function currentMode() {
+        return modeSelect.value;
+      }
+
+      function boldLeadingSpeakers(content, speakers, useIgnoreCase) {
+        const lines = content.split(/\r?\n/);
+
+        return lines
+          .map((line) => {
+            for (const speaker of speakers) {
+              const prefix = `${speaker}:`;
+              const candidate = line.slice(0, prefix.length);
+              if (normalize(candidate, useIgnoreCase) === normalize(prefix, useIgnoreCase)) {
+                return `**${line.slice(0, prefix.length)}**${line.slice(prefix.length)}`;
+              }
+            }
+            return line;
+          })
+          .join("\n");
+      }
+
+      function promoteStandaloneLines(content, terms, useIgnoreCase) {
+        const lines = content.split(/\r?\n/);
+
+        return lines
+          .map((line) => {
+            const trimmed = line.trim();
+            if (!trimmed || trimmed.startsWith("## ")) {
+              return line;
+            }
+
+            for (const term of terms) {
+              if (normalize(trimmed, useIgnoreCase) === normalize(term, useIgnoreCase)) {
+                return `## ${trimmed}`;
+              }
+            }
+            return line;
+          })
+          .join("\n");
+      }
+
+      function outputFileName(originalName) {
+        const suffix = currentMode() === "promote-standalone" ? ".heading" : ".bold";
+        if (!originalName) return `transcript${suffix}.md`;
+        const dotIndex = originalName.lastIndexOf(".");
+        if (dotIndex === -1) return `${originalName}${suffix}.md`;
+        return `${originalName.slice(0, dotIndex)}${suffix}${originalName.slice(dotIndex)}`;
+      }
+
+      function setStatus(text) {
+        status.textContent = text;
+      }
+
+      function refreshModeUI() {
+        if (currentMode() === "promote-standalone") {
+          rulesLabel.textContent = "需要提升的独立行";
+          rulesHint.innerHTML =
+            '只有整行文本与这里的某一项完全一致时，才会被改成 <code>## 文本</code>。一行一个。';
+          speakerList.placeholder =
+            "一行一个，例如：\nRachel Abrams\nDavid Sanger\n[advertisements]";
+          modeHint.innerHTML =
+            "当前模式会把独立占一行、且与规则完全匹配的文本提升成 Markdown 二级标题。";
+        } else {
+          rulesLabel.textContent = "需要处理的人名";
+          rulesHint.innerHTML =
+            '只有这些名字在段首以 <code>Name:</code> 形式出现时才会被加粗。';
+          speakerList.placeholder = "一行一个，例如：\nImani Mosise\nDavid Sanger";
+          modeHint.innerHTML =
+            "当前模式会把你指定的人名在 <code>Name:</code> 这种段首格式里改成 Markdown 粗体。";
+        }
+        outputMeta.textContent = `建议输出文件名：${outputFileName(currentFileName)}`;
+      }
+
+      fileInput.addEventListener("change", async (event) => {
+        const file = event.target.files?.[0];
+        if (!file) {
+          return;
+        }
+        currentFileName = file.name;
+        fileName.textContent = `已选择：${file.name}`;
+        inputText.value = await file.text();
+        outputMeta.textContent = `建议输出文件名：${outputFileName(file.name)}`;
+        setStatus("文件已加载。现在可以输入 speaker 名单并点击“处理文本”。");
+      });
+
+      loadSample.addEventListener("click", () => {
+        currentFileName = "sample_transcript.md";
+        fileName.textContent = "已载入示例文本。";
+        if (currentMode() === "promote-standalone") {
+          speakerList.value = "Rachel Abrams\nDavid Sanger\n[advertisements]";
+          inputText.value = [
+            "# Sample Episode",
+            "",
+            "Opening line here.",
+            "",
+            "Rachel Abrams",
+            "Welcome to the show.",
+            "",
+            "David Sanger",
+            "Here is the guest response.",
+            "",
+            "[advertisements]",
+            "",
+            "Back to the story.",
+          ].join("\n");
+        } else {
+          speakerList.value = "Imani Mosise\nDavid Sanger";
+          inputText.value = [
+            "Imani Mosise: Hello and welcome.",
+            "",
+            "Imani Mosise Hello and welcome.",
+            "",
+            "David Sanger: We are seeing a shift in tone.",
+            "",
+            "Other Voice: This line should stay untouched.",
+          ].join("\n");
+        }
+        outputMeta.textContent = `建议输出文件名：${outputFileName(currentFileName)}`;
+        setStatus("示例已载入。你可以直接点击“处理文本”查看效果。");
+      });
+
+      modeSelect.addEventListener("change", () => {
+        outputText.value = "";
+        refreshModeUI();
+        setStatus("处理模式已切换。请检查规则列表后再运行。");
+      });
+
+      runButton.addEventListener("click", () => {
+        const content = inputText.value;
+        const speakers = getSpeakers();
+        if (!content.trim()) {
+          setStatus("先提供要处理的 markdown 文本。");
+          return;
+        }
+        if (speakers.length === 0) {
+          setStatus("先输入至少一个 speaker 名字。");
+          return;
+        }
+
+        const result =
+          currentMode() === "promote-standalone"
+            ? promoteStandaloneLines(content, speakers, ignoreCase.checked)
+            : boldLeadingSpeakers(content, speakers, ignoreCase.checked);
+        outputText.value = result;
+        outputMeta.textContent = `建议输出文件名：${outputFileName(currentFileName)}`;
+        setStatus(`处理完成。共使用 ${speakers.length} 条规则。`);
+      });
+
+      downloadButton.addEventListener("click", () => {
+        if (!outputText.value.trim()) {
+          setStatus("先处理文本，再下载结果。");
+          return;
+        }
+        const blob = new Blob([outputText.value], { type: "text/markdown;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = outputFileName(currentFileName);
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+        setStatus("结果已下载。");
+      });
+
+      copyButton.addEventListener("click", async () => {
+        if (!outputText.value.trim()) {
+          setStatus("先处理文本，再复制结果。");
+          return;
+        }
+        try {
+          await navigator.clipboard.writeText(outputText.value);
+          setStatus("结果已复制到剪贴板。");
+        } catch (error) {
+          setStatus("复制失败。你可以手动选中右侧输出文本。");
+        }
+      });
+
+      refreshModeUI();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Markdown Reader Collect</title>
+    <style>
+      :root {
+        --bg: #edf2ec;
+        --panel: #fbfcf9;
+        --text: #243028;
+        --muted: #65746b;
+        --line: #d7dfd4;
+        --accent: #4f6a59;
+        --accent-soft: #e6efe8;
+        --button-text: #f7faf7;
+        --collected-bg: #f1f6f1;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Arial, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", sans-serif;
+      }
+
+      .page {
+        width: min(1240px, calc(100vw - 24px));
+        margin: 16px auto 28px;
+      }
+
+      .header {
+        margin-bottom: 16px;
+        padding: 22px 24px 18px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        line-height: 1.1;
+      }
+
+      .intro {
+        margin: 0;
+        max-width: 70em;
+        color: #445149;
+        line-height: 1.7;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(320px, 380px) minmax(0, 1fr);
+        gap: 16px;
+        align-items: start;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+
+      .controls,
+      .reader-shell {
+        padding: 20px;
+      }
+
+      .section-title {
+        margin: 0 0 14px;
+        font-size: 0.9rem;
+        color: var(--accent);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .field {
+        margin-bottom: 16px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+        font-weight: 700;
+      }
+
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 12px 13px;
+        border: 1px solid #c8d2c5;
+        border-radius: 0;
+        background: #ffffff;
+        color: var(--text);
+        font: inherit;
+      }
+
+      textarea {
+        min-height: 200px;
+        resize: vertical;
+        line-height: 1.65;
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      .hint {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.5;
+      }
+
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      button,
+      .file-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 0 16px;
+        border: 1px solid var(--accent);
+        border-radius: 0;
+        background: var(--accent);
+        color: var(--button-text);
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      button.secondary,
+      .file-button.secondary {
+        background: transparent;
+        color: var(--accent);
+      }
+
+      .status {
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .reader-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .reader-meta {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .reader {
+        position: relative;
+        min-height: 720px;
+        padding: 26px 28px 30px;
+        border: 1px solid var(--line);
+        background: #fefefc;
+      }
+
+      .reader .doc-title {
+        margin: 0 0 22px;
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 1.08;
+      }
+
+      .heading-2 {
+        margin: 30px 0 12px;
+        color: var(--accent);
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .paragraph-block {
+        margin: 0 0 22px;
+      }
+
+      .paragraph-text {
+        margin: 0;
+        color: var(--text);
+        font-family: Georgia, "Times New Roman", "Songti SC", serif;
+        font-size: 1.08rem;
+        line-height: 1.9;
+        text-align: justify;
+        text-justify: inter-word;
+        cursor: text;
+      }
+
+      .paragraph-block.is-active .paragraph-text {
+        background: linear-gradient(180deg, transparent 70%, rgba(79, 106, 89, 0.08) 70%);
+      }
+
+      .collected-line {
+        display: none;
+        margin-top: 10px;
+        padding: 10px 12px;
+        border-left: 3px solid var(--accent);
+        background: var(--collected-bg);
+        color: #3c4f44;
+        font-size: 0.92rem;
+        line-height: 1.6;
+      }
+
+      .collected-line.is-visible {
+        display: block;
+      }
+
+      .collect-pill {
+        font-weight: 700;
+        color: var(--accent);
+      }
+
+      .floating-action {
+        position: absolute;
+        display: none;
+        z-index: 20;
+      }
+
+      .floating-action.is-visible {
+        display: block;
+      }
+
+      .floating-action button {
+        min-height: 36px;
+        padding: 0 12px;
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+      }
+
+      @media (max-width: 920px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .reader {
+          min-height: 420px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="header">
+        <p class="eyebrow">Local Reader Prototype</p>
+        <h1>Markdown Reader Collect</h1>
+        <p class="intro">
+          这个原型把 markdown 渲染成可阅读页面。你可以在单个段落内选中词语或短语，点击弹出的
+          <code>Collect</code> 按钮后，采集结果会附在该段之后，显示为
+          <code>[COLLECTED] xxx | xxx</code>。原始 markdown 不会立刻被改写，导出时才会生成新文本。
+        </p>
+      </header>
+
+      <section class="layout">
+        <aside class="panel controls">
+          <h2 class="section-title">Controls</h2>
+
+          <div class="field">
+            <label for="fileInput">上传 Markdown 文件</label>
+            <div class="button-row">
+              <label class="file-button" for="fileInput">选择文件</label>
+              <button class="secondary" type="button" id="loadSample">载入示例</button>
+            </div>
+            <input id="fileInput" type="file" accept=".md,.txt,text/markdown,text/plain" />
+            <div class="hint" id="fileName">当前没有选择文件。</div>
+          </div>
+
+          <div class="field">
+            <label for="inputText">输入 Markdown</label>
+            <textarea id="inputText" placeholder="你也可以直接把 markdown 粘贴到这里。"></textarea>
+            <div class="hint">
+              当前版本支持的结构很简单：<code>#</code> 一级标题、<code>##</code> 二级标题和普通正文段落。
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button type="button" id="renderButton">渲染阅读器</button>
+            <button class="secondary" type="button" id="exportButton">导出新 Markdown</button>
+            <button class="secondary" type="button" id="copyButton">复制导出文本</button>
+          </div>
+
+          <p class="status" id="status">
+            先上传文件或粘贴 markdown，然后点击“渲染阅读器”。
+          </p>
+        </aside>
+
+        <section class="panel reader-shell">
+          <div class="reader-toolbar">
+            <h2 class="section-title">Reader</h2>
+            <div class="reader-meta" id="readerMeta">尚未渲染内容。</div>
+          </div>
+          <section class="reader" id="reader">
+            <div class="floating-action" id="floatingAction">
+              <button type="button" id="collectButton">Collect</button>
+            </div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script>
+      const fileInput = document.getElementById("fileInput");
+      const fileName = document.getElementById("fileName");
+      const inputText = document.getElementById("inputText");
+      const renderButton = document.getElementById("renderButton");
+      const exportButton = document.getElementById("exportButton");
+      const copyButton = document.getElementById("copyButton");
+      const loadSample = document.getElementById("loadSample");
+      const status = document.getElementById("status");
+      const reader = document.getElementById("reader");
+      const readerMeta = document.getElementById("readerMeta");
+      const floatingAction = document.getElementById("floatingAction");
+      const collectButton = document.getElementById("collectButton");
+
+      let currentFileName = "";
+      let blocks = [];
+      let activeSelection = null;
+
+      function setStatus(text) {
+        status.textContent = text;
+      }
+
+      function escapeHtml(value) {
+        return value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;");
+      }
+
+      function normalizeForCompare(value) {
+        return value.trim().toLocaleLowerCase();
+      }
+
+      function parseMarkdown(content) {
+        const lines = content.split(/\r?\n/);
+        const parsed = [];
+        let pendingParagraph = [];
+
+        function flushParagraph() {
+          if (pendingParagraph.length === 0) return;
+          parsed.push({
+            type: "paragraph",
+            text: pendingParagraph.join(" "),
+            collected: [],
+          });
+          pendingParagraph = [];
+        }
+
+        for (const rawLine of lines) {
+          const line = rawLine.trim();
+          if (!line) {
+            flushParagraph();
+            continue;
+          }
+
+          if (line.startsWith("# ")) {
+            flushParagraph();
+            parsed.push({ type: "h1", text: line.slice(2).trim() });
+            continue;
+          }
+
+          if (line.startsWith("## ")) {
+            flushParagraph();
+            parsed.push({ type: "h2", text: line.slice(3).trim() });
+            continue;
+          }
+
+          pendingParagraph.push(line);
+        }
+
+        flushParagraph();
+        return parsed;
+      }
+
+      function hideFloatingAction() {
+        floatingAction.classList.remove("is-visible");
+        activeSelection = null;
+        reader.querySelectorAll(".paragraph-block.is-active").forEach((node) => {
+          node.classList.remove("is-active");
+        });
+      }
+
+      function renderReader() {
+        const content = inputText.value;
+        if (!content.trim()) {
+          setStatus("先提供 markdown 内容。");
+          return;
+        }
+
+        blocks = parseMarkdown(content);
+        activeSelection = null;
+
+        reader.innerHTML = "";
+        reader.appendChild(floatingAction);
+
+        let paragraphCount = 0;
+
+        blocks.forEach((block, index) => {
+          if (block.type === "h1") {
+            const title = document.createElement("h1");
+            title.className = "doc-title";
+            title.textContent = block.text;
+            reader.appendChild(title);
+            return;
+          }
+
+          if (block.type === "h2") {
+            const heading = document.createElement("div");
+            heading.className = "heading-2";
+            heading.textContent = block.text;
+            reader.appendChild(heading);
+            return;
+          }
+
+          paragraphCount += 1;
+          const wrapper = document.createElement("section");
+          wrapper.className = "paragraph-block";
+          wrapper.dataset.blockIndex = String(index);
+
+          const paragraph = document.createElement("p");
+          paragraph.className = "paragraph-text";
+          paragraph.textContent = block.text;
+
+          const collected = document.createElement("div");
+          collected.className = "collected-line";
+          collected.dataset.blockIndex = String(index);
+
+          wrapper.append(paragraph, collected);
+          reader.appendChild(wrapper);
+          updateCollectedDisplay(index);
+        });
+
+        hideFloatingAction();
+        readerMeta.textContent = `已渲染 ${paragraphCount} 个正文段落。`;
+        setStatus("阅读器已渲染。现在可以在单个段落里选中文本并采集。");
+      }
+
+      function updateCollectedDisplay(blockIndex) {
+        const block = blocks[blockIndex];
+        const node = reader.querySelector(`.collected-line[data-block-index="${blockIndex}"]`);
+        if (!node || !block || block.type !== "paragraph") return;
+
+        if (block.collected.length === 0) {
+          node.classList.remove("is-visible");
+          node.textContent = "";
+          return;
+        }
+
+        node.classList.add("is-visible");
+        node.innerHTML = `<span class="collect-pill">[COLLECTED]</span> ${block.collected.join(" | ")}`;
+      }
+
+      function selectionInfo() {
+        const selection = window.getSelection();
+        if (!selection || selection.rangeCount === 0 || selection.isCollapsed) {
+          return null;
+        }
+
+        const text = selection.toString().trim();
+        if (!text) {
+          return null;
+        }
+
+        const range = selection.getRangeAt(0);
+        const startBlock = range.startContainer.parentElement?.closest(".paragraph-block");
+        const endBlock = range.endContainer.parentElement?.closest(".paragraph-block");
+
+        if (!startBlock || !endBlock || startBlock !== endBlock) {
+          return null;
+        }
+
+        const paragraph = startBlock.querySelector(".paragraph-text");
+        if (!paragraph || !paragraph.contains(range.commonAncestorContainer)) {
+          return null;
+        }
+
+        return {
+          text,
+          blockIndex: Number(startBlock.dataset.blockIndex),
+          rect: range.getBoundingClientRect(),
+          node: startBlock,
+        };
+      }
+
+      function showFloatingAction(info) {
+        reader.querySelectorAll(".paragraph-block.is-active").forEach((node) => {
+          node.classList.remove("is-active");
+        });
+        info.node.classList.add("is-active");
+
+        const readerRect = reader.getBoundingClientRect();
+        const top = info.rect.top - readerRect.top + reader.scrollTop - 44;
+        const left = info.rect.left - readerRect.left + reader.scrollLeft;
+
+        floatingAction.style.top = `${Math.max(8, top)}px`;
+        floatingAction.style.left = `${Math.max(8, left)}px`;
+        floatingAction.classList.add("is-visible");
+        activeSelection = info;
+      }
+
+      function collectSelection() {
+        if (!activeSelection) {
+          setStatus("没有可采集的文本。");
+          return;
+        }
+
+        const block = blocks[activeSelection.blockIndex];
+        if (!block || block.type !== "paragraph") {
+          return;
+        }
+
+        const value = activeSelection.text.trim();
+        if (!value) {
+          hideFloatingAction();
+          return;
+        }
+
+        const normalized = normalizeForCompare(value);
+        const exists = block.collected.some((item) => normalizeForCompare(item) === normalized);
+
+        if (!exists) {
+          block.collected.push(value);
+          updateCollectedDisplay(activeSelection.blockIndex);
+          setStatus(`已加入第 ${activeSelection.blockIndex + 1} 个块的采集列表：${value}`);
+        } else {
+          setStatus(`这段里已经采集过：${value}`);
+        }
+
+        window.getSelection()?.removeAllRanges();
+        hideFloatingAction();
+      }
+
+      function exportMarkdown() {
+        if (blocks.length === 0) {
+          setStatus("先渲染阅读器，再导出。");
+          return "";
+        }
+
+        const lines = [];
+        blocks.forEach((block) => {
+          if (block.type === "h1") {
+            lines.push(`# ${block.text}`);
+            lines.push("");
+            return;
+          }
+          if (block.type === "h2") {
+            lines.push(`## ${block.text}`);
+            lines.push("");
+            return;
+          }
+
+          lines.push(block.text);
+          if (block.collected.length > 0) {
+            lines.push(`[COLLECTED] ${block.collected.join(" | ")}`);
+            lines.push("");
+          } else {
+            lines.push("");
+          }
+        });
+
+        return lines.join("\n").replace(/\n{3,}/g, "\n\n").trim() + "\n";
+      }
+
+      function outputName(originalName) {
+        if (!originalName) return "reader.collected.md";
+        const dotIndex = originalName.lastIndexOf(".");
+        if (dotIndex === -1) return `${originalName}.collected.md`;
+        return `${originalName.slice(0, dotIndex)}.collected${originalName.slice(dotIndex)}`;
+      }
+
+      fileInput.addEventListener("change", async (event) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+        currentFileName = file.name;
+        fileName.textContent = `已选择：${file.name}`;
+        inputText.value = await file.text();
+        setStatus("文件已加载。现在可以点击“渲染阅读器”。");
+      });
+
+      loadSample.addEventListener("click", () => {
+        currentFileName = "sample_reader.md";
+        fileName.textContent = "已载入示例文本。";
+        inputText.value = [
+          "# Sample Transcript",
+          "",
+          "## Rachel Abrams",
+          "",
+          "Just hours before a deadline that could have led to a massive escalation, both sides appeared to reach a temporary ceasefire.",
+          "",
+          "Today, David Sanger explains what led to the deal and what it would take to make it stick.",
+          "",
+          "## David Sanger",
+          "",
+          "The central question is whether shipping through the Strait of Hormuz truly returns to normal during the pause.",
+        ].join("\n");
+        setStatus("示例已载入。点击“渲染阅读器”就可以开始试选词。");
+      });
+
+      renderButton.addEventListener("click", renderReader);
+      collectButton.addEventListener("click", collectSelection);
+
+      document.addEventListener("selectionchange", () => {
+        if (!reader.contains(document.activeElement) && !reader.contains(window.getSelection()?.anchorNode)) {
+          const selection = window.getSelection();
+          if (!selection || selection.isCollapsed) {
+            hideFloatingAction();
+            return;
+          }
+        }
+
+        const info = selectionInfo();
+        if (!info) {
+          hideFloatingAction();
+          return;
+        }
+        showFloatingAction(info);
+      });
+
+      document.addEventListener("mousedown", (event) => {
+        if (!floatingAction.contains(event.target) && !reader.contains(event.target)) {
+          hideFloatingAction();
+        }
+      });
+
+      exportButton.addEventListener("click", () => {
+        const exported = exportMarkdown();
+        if (!exported) return;
+        const blob = new Blob([exported], { type: "text/markdown;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = outputName(currentFileName);
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+        setStatus("新的 markdown 已导出。");
+      });
+
+      copyButton.addEventListener("click", async () => {
+        const exported = exportMarkdown();
+        if (!exported) return;
+        try {
+          await navigator.clipboard.writeText(exported);
+          setStatus("导出 markdown 已复制到剪贴板。");
+        } catch (error) {
+          setStatus("复制失败。你可以先导出文件。");
+        }
+      });
+    </script>
+  </body>
+</html>
