@@ -1,0 +1,243 @@
+# A Cease-Fire in Iran
+
+FOX News alert. We have a deal for now.
+
+From “The New York Times,” I’m Rachel Abrams. And this is “The Daily.”
+
+The US and Iran have both confirmed that they have agreed to a two-week pause.
+
+It appears Iran has accepted President Trump’s terms.
+
+Subject to the immediate opening of the strait.
+
+Just in out of Iran, a statement read on state-run media instructing all military units to follow the supreme leader’s order and stop firing.
+
+## rachel abrams
+Just hours before a Trump-imposed deadline that could have led to a massive escalation in the war with Iran, the United States and Iran appeared to reach a temporary ceasefire.
+
+## rachel abrams
+Today, Chief White House correspondent David Sanger explains what led to this last-minute deal and what it would take to make it stick. It’s Wednesday, April 8.
+
+David Sanger, thank you so much for taping with us 9:35 PM on this Tuesday night.
+
+## david sanger
+It’s been a wild day, Rachel.
+
+## rachel abrams
+I can imagine. David, it feels like the entire world has been holding its breath for the last two days. As President Trump ratcheted up the threats on Iran to open the Straits of Hormuz, which included Tuesday morning, when he basically threatened to wipe out the entire country. And just hours before the 8:00 PM deadline that the president had given Iran to make a deal, both the United States and Iran announced that they’d reached some kind of temporary ceasefire. What do we about what they actually agreed to?
+
+## david sanger
+Well, we’ve been trying to that out, because the American accounts and the Iranian accounts, as you might imagine, don’t completely match up. But what President Trump said was that Iran and the US have agreed to a 14-day ceasefire. During that time, he said, Iran would commit to making sure that the Strait of Hormuz would be fully reopened, and that that would allow this bottleneck of ships full of oil, full of fertilizer, full of helium for semiconductor production to begin flowing again and relieve these huge shortages that have been wracking the world economy. We don’t exactly when that will happen, but the American bombing of Iran stopped almost immediately.
+
+## rachel abrams
+OK, so that is what Trump agreed to, David. But you mentioned that it did not really seem like both sides were on the same page when the ceasefire was first announced. What have the Iranians said that they agreed to?
+
+## david sanger
+Well, if you just read President Trump’s announcement, you’d think that the Strait of Hormuz was just being thrown wide open, the way it was before the war started. But if you read the statement that came out a few minutes later from Iran’s foreign minister, Abbas Araghchi, who’s quite experienced, has been involved in many of these negotiations over the years. He said that Iran will cease their defensive operation for a period of two weeks and that safe passage through the Strait of Hormuz would only be possible by coordinating with Iran’s armed forces.
+
+So that means that in the Iranian vision, the Iranian military will retain the control that it seized in the past five or six weeks. And who knows at what pace they’re going to allow ships to pass, whether or not they’re going to allow them to just pass freely or charge them tolls. We just don’t know.
+
+## rachel abrams
+OK, so obviously some daylight between these two statements, room for interpretation. But we have not talked about another country that is a major actor here. And that is Israel.
+
+Israel, of course, attacked Iran along with the United States. That is how this war started. Has Israel said anything about this agreement. Do we know that they are party to it? Where do they stand?
+
+## david sanger
+Well, the White House told us that Israel had agreed to the terms. And then later in the evening, the Israelis turned out a statement from the prime minister’s office, saying they support President Trump’s decision. But it was interesting wording, because they didn’t say that they were terribly enthused about it.
+
+## rachel abrams
+I just want to step back for a second, David, because it feels kind of stunning that literally just a few hours ago, this threat to wipe out an entire country was on the table. The two sides weren’t even talking to each other. We had no idea what this threat meant. It just sort of felt like any possible option was on the table until very, very recently. So how did we get to this point where we are now with both sides having reached a temporary ceasefire agreement?
+
+## david sanger
+Well, Rachel, you’ll remember, as we’ve discussed on earlier shows, the president was feeling more and more pressure as the effects of the closing of the Strait of Hormuz was spreading around the world. So at first, he lashed out and he said to the Iranians, you have 48 hours to get the strait back open. And the Iranians kind of ignored him.
+
+And then starting on March 26, he said, OK, there are 10 days to get a negotiation going. So he set this 10-day clock, essentially to Tuesday evening at 8:00 PM. But as the weekend approached, the Iranians were ignoring him. There was very little communication underway. And the Iranians were mocking the president on social media for all of his changing deadlines.
+
+Then this all got interrupted by a sudden crisis that distracted everyone from all of this. This was, of course, the shootdown of the F-15E fighter jet on Friday. The pilot and the weapons officer both ejected. And no one could find the weapons officer.
+
+## rachel abrams
+Right. That was actually the subject of Tuesday’s episode, this unbelievably daring, costly rescue operation of this weapons officer, which they pulled off on Saturday. And that, as our colleague Eric Schmitt told us, seems to have emboldened President Trump, as he sort of begins to pick up where he left off with these negotiations and threats with Iran.
+
+## david sanger
+That’s exactly right. And remember, before the shootdown of the plane, the president had hinted that if the Iranians don’t relent, he was going to begin to go after power plants, he said. And he suggested other infrastructure. And the Iranians came back and basically said, if you wipe out our power plants, you can say goodbye to the power plants around the Gulf.
+
+Of course, all of this was put aside during the hunt for the missing airmen. But by Sunday morning, Easter Sunday, the president was over the high of retrieving the colonel, and he was right back in his set of demands. And that’s what turned out to be the first of two truly bizarre social media posts.
+
+## rachel abrams
+And what was that post?
+
+## david sanger
+Well, I’ll read it to you, Rachel. “Tuesday will be Power Plant Day and Bridge Day, all wrapped up in one in Iran. Open the fucking strait, you crazy bastards, or you’ll be living in hell. Just watch.” So we’ll set aside for a moment the pretty undiplomatic language. It actually led people to believe that the president might be willing to go escalate and escalate significantly in a way that would get us even deeper into this war.
+
+## rachel abrams
+So basically, by Sunday, it sounds like two very important things have happened. One is that the White House is crowing from this huge victory of rescuing this airman in this daring operation. But countering that is the fact that the president is still not getting what he wants from Iran. And as you mentioned, the tension is ratcheting up. And this Tuesday night deadline is looming and they are barreling toward it.
+
+## david sanger
+That’s exactly right. And on Monday, the president dug the hole even deeper. First, he went out on the South Lawn during what’s usually the very charming Easter Egg Roll, with children running around. And standing next to the Easter Bunny, he began to ratchet up the threats to Iran and talk about the depth to which he would destroy their infrastructure. And then he began to say, we will destroy Iran’s bridges, their electric power plants and so forth, and we will do it in hours, on a scale no one has ever seen before.
+
+## rachel abrams
+It was more specific and, therefore, it seemed, again, like it was ratcheting up this rhetoric.
+
+## david sanger
+That’s right. And here in the office, we were asking the same question that was being asked all over the country, which is, was he truly determined to go that much deeper into an unpopular war? Or was he simply using these threats as a tactic to try to see if he could get the Iranian system moving?
+
+And then Tuesday morning, just as people were pouring their coffee at a little after 8:00 in the morning, comes another social media message that actually rivaled the Sunday one. Let me read that one to you, too, Rachel.
+
+## rachel abrams
+Please.
+
+## david sanger
+“A whole civilization will die tonight, never to be brought back again. I don’t want that to happen, but it probably will. However, now that we have complete and total regime change, where different, smarter, less radicalized minds prevail, maybe something revolutionarily wonderful can happen. Who knows? We’ll find out tonight.”
+
+## rachel abrams
+Even for a president that breaks norms all the time in terms of how he speaks to the public and the threats that he makes, the rhetoric that he makes, this social media post was far beyond anything we had ever heard Trump say before. This was a threat to wipe out 90 million people.
+
+## david sanger
+That’s right, Rachel. Or certainly that’s how I think we read it and most everyone read it. And it suggested many different things. And the first is the president wasn’t simply discussing defeating the Iranian government or going after nuclear sites here, he was talking about committing what would essentially be a huge war crime. And there was response all over the place.
+
+I think that Trump has lost his mind.
+
+He is unfit to serve as our president.
+
+He’s not capable of being the president.
+
+## david sanger
+Democrats, of course, were calling for invoking the 25th Amendment, in which the cabinet meets and determines that the president is unable to carry out his duties and temporarily puts the vice president in place.
+
+His cabinet has a responsibility.
+
+And we need to be invoking the 25th Amendment.
+
+He should be removed using the 25th Amendment immediately.
+
+## david sanger
+But it wasn’t just Democrats.
+
+How do we 25th Amendment is asked.
+
+## david sanger
+Even within the MAGA movement, there were great critics of this, Alex Jones.
+
+The problem is to get the 25th Amendment is harder than impeachment. You have to get 2/3 of the House and 2/3 of the Senate.
+
+So what do we do?
+
+archived recording (alex jones)
+Tackle Trump and let him pretend he’s president and publicly report that he’s going through a health issue and Vance take over. It literally needs to be something like that. It’s that bad.
+
+## david sanger
+Marjorie Taylor Greene and Candace Owens, who were talking about the 25th Amendment.
+
+Candace Owens says the 25th Amendment needs to be invoked. He is a genocidal lunatic.
+
+## david sanger
+Tucker Carlson called Mr. Trump’s post vile —
+
+It is vile on every level.
+
+## david sanger
+— and suggested that —
+
+Those people who are in direct contact with the president need to say no, I’ll resign.
+
+## david sanger
+— maybe people shouldn’t be following these kinds of orders.
+
+I’ll do whatever I can do legally to stop this, because this is insane. And if given the order, I’m not carrying it out.
+
+## david sanger
+And then there are some, like Senator Ron Johnson of Wisconsin, who’s usually a little more reticent about criticizing the president, who said, this simply is not how Americans speak and how presidents ought to speak.
+
+
+I do not want to see us start blowing up civilian infrastructure. I do not want to see that. We are not at war with the Iranian people. We are trying to liberate them.
+
+## rachel abrams
+So by the end of the day, David, what have you and our colleagues learned about how real this threat is? Is there evidence that the military has mobilized in any way to launch any kind of massive attack?
+
+## david sanger
+Well, we saw lots of mobilization of aircraft moving from the United States to Europe and Europe on to the Middle East. But we’ve been seeing that for the past five weeks. So it was hard to tell whether this was more of the same or a true escalation. But certainly, there were so many American forces in the Middle East that if the president wanted to make good on this threat, he could. And, of course, the clock was ticking all day on Tuesday.
+
+But we were still hearing the echoes of some kind of negotiation taking place indirectly through the Pakistani foreign minister and the Pakistani prime minister. And then at a little after 6 o’clock, the president announced that he was once again calling a timeout here. Suddenly, there was a ceasefire, a new two-week-long deadline, and everyone from market investors to the military, to many around the Gulf just breathed this huge sigh of relief.
+
+## rachel abrams
+We’ll be right back.
+
+[advertisements]
+
+So David, as you described, this moment of ceasefire seems to be this huge relief. But how real does this deal actually feel? And what does it actually mean?
+
+## david sanger
+Well, it could mean the end of this war or it could mean just a brief pause. Ceasefires are fragile by nature. We’re going to have to see if anybody violates it.
+
+And even if they have the discipline to keep it in place, we have to determine if the traffic that’s going through the Strait of Hormuz is getting back to what it was before February 28, when the fighting broke out. And, of course, we’re going to be in a situation now where the Iranian military actually still controls who’s going through the strait. That wasn’t the case back in February.
+
+## rachel abrams
+Right.
+
+## david sanger
+For the president, he said, basically, it’s got to go back to the way it was. But the fact of the matter is, the Iranians have now discovered this is their greatest leverage. And it’s not a power they are likely to give up anytime soon.
+
+## rachel abrams
+So was that the biggest test of the ceasefire, whether we see all these ships going through the strait?
+
+## david sanger
+That’s the immediate test of the ceasefire. But remember, the ceasefire is only the means to an end. And its purpose is to allow the time and space to go negotiate on the bigger issues. It took two and a half years, Rachel, to negotiate the 2015 agreement between the Obama administration and the Iranians. And that was in peace time. You can imagine how difficult it will be now at a moment when the Iranians feel like this war left them empowered.
+
+## rachel abrams
+To that point, at the outset of the war, the US said that one of its big reasons for going to war was, in fact, among other reasons, keep Iran from making a nuclear weapon. That feels very absent from these discussions. Why is that?
+
+## david sanger
+Well, the nuclear weapons issue is, presumably, the first issue they’re going to have to take up in these negotiations over the next two weeks. And it’s going to be hard. And the reason it’s going to be hard is, first of all, the president himself has been all over the map here. Before the war broke out, he said the United States cannot tolerate Iran having any nuclear material, any of its stockpile left in the country. It all had to go.
+
+Then about a week and a half ago, he said, I don’t really care. It’s buried so deep, we can watch it by satellite. And now it’s likely he’s back to the negotiating position they were taking before the war, which is, Iran cannot be left with any nuclear material. And if the president left a significant amount of near bomb-grade uranium in Iran, he would be getting less out of the Iranians than Barack Obama got out of them in 2015. And frankly, it’s hard to imagine that the president wants to read that he went to war with Iran and didn’t get the material that was the reason for this conflict at the start.
+
+## rachel abrams
+Well, that makes me wonder about the effectiveness of these talks overall and how we should be thinking about them. The threat to annihilate a whole country, is that something that brought them to the table for a meaningful negotiations to end the war and get demands that the United States actually wanted? Or is this ceasefire just a temporary de-escalation that serves to save face more than anything else?
+
+## david sanger
+It gains nothing we didn’t have before the war began. But I think you have to give credit to the president, because this ratcheting up of pressure certainly played some role in forcing an agreement. It’s not clear whether or not it actually terrified the Iranians, because their decision-making process is so spread out among the military and the clerics and so forth. It’s not clear who was making these decisions.
+
+But it certainly scared the region. And I think it scared the Chinese, who were highly dependent on oil moving through the strait. So there were pressure points that the president was able to take advantage of.
+
+## rachel abrams
+David, on the off chance that this temporary ceasefire leads to a permanent ceasefire, what will the White House, what will the United States have actually gained from all of this?
+
+## david sanger
+Look, I think the United States and the Israelis have accomplished a lot. They took out, in the opening hours of the war, the supreme leader. They devastated levels of the military and intelligence and nuclear establishment. They set back the missile program and the missile production program.
+
+But if this ceasefire essentially becomes permanent, with no change in Iran beyond the restoration of traffic in the Strait of Hormuz, then the White House will have accomplished virtually none of its major goals. The country is still run by a military and theocratic group of elites who have terrorized their own population. They still have their nuclear material and could, in theory, try to go rebuild and race for a bomb.
+
+They still have missile supplies and drones. Not on the scale that they did before the attacks, but we’ve learned that they could rebuild fairly quickly. And most importantly, I think, they still have a sense that they were able to stand up to the United States and Israel and resist against a much larger invading force.
+
+## rachel abrams
+David, we’ve talked on the show, quite a bit, about how you can’t put everything back together that has been broken by this war. Meaning, that the economic impacts, the political impacts are not going to just go back to the status quo, even if the war ends tonight or in two weeks. So much infrastructure has been destroyed, so much has been done to make these impacts ripple for, potentially, years to come. And so I wonder what consequences, specifically, you think as of this moment, feel like they are enduring?
+
+## david sanger
+Well, a few things. First of all, the Iranians have discovered that they have a greater power than they knew over commerce around the world. Second, the Gulf states feel more vulnerable. They’ve built these big, beautiful cities full of skyscrapers. And they’ve entered the 21st century, and what do they discover? That the Iranians can put missiles through their windows and through their desalination plants.
+
+The world economy feels more fragile, because we’ve discovered yet another supply chain vulnerability. And we’ve discovered that while the United States thought, one more time, that it had gotten out of the Middle East, an explicit goal in the president’s national security strategy that came out last fall, in fact, it’s been sucked back in on a scale few could have imagined even a few months ago. And I think there’s a last thing we’ve learned.
+
+The world never really approved of the amount of power the United States has had, but it’s usually signed up to the thought that the US was fundamentally a benevolent superpower in the past. And yet, I think we lost a lot of that reputation in this attack on Iran. That there was a sense that the president was never committed to the February diplomacy, that there was a sense that he thought he could topple a weak regime, that he could go out and threaten the lives of 92 million people, and that the threat came from a president who oversees the world’s most powerful military.
+
+And so eventually, gas prices will come down. And eventually, oil will flow more naturally. And over time, the damage of the war will be rebuilt the way it was in Japan and Germany and Vietnam. But whether the world ever views the United States quite the way it did before this happened, I’m not sure that’s going to be back for a long time.
+
+## rachel abrams
+David Sanger, thank you so much.
+
+## david sanger
+Thank you, Rachel.
+
+## rachel abrams
+We’ll be right back.
+
+Here’s what else you need to today. Shelly Kittleson, an American journalist who was abducted in Baghdad by an Iraqi militia aligned with Iran, was freed on Tuesday after a week in captivity. Kittleson has reported on the Middle East for more than a decade for various news outlets. And she was set free in exchange for the release of several imprisoned members of the militia.
+
+The kidnapping comes amid growing anxieties about Iranian-backed militias attacking American targets, since the United States and Israel-led war with Iran began.
+
+[THEME MUSIC]
+
+Today’s episode was produced by Michael Simon Johnson, Olivia Natt and Mooj Zadie. It was edited by MJ Davis Lin with help from Paige Cowett. It contains music by Marion Lozano, Elisheba Ittoop and Dan Powell.
+
+Our theme music is by Wonderly. This episode was engineered by Alyssa Moxley. Special thanks to Efim Shapiro.
+
+That’s it for “The Daily.” I’m Rachel Abrams. See you tomorrow.

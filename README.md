@@ -136,6 +136,11 @@ python3 scripts/WSJ_bold_leading_speakers.py podcast_WSN.md \
 # 更加牛逼的、一步到位的做法
 
 > 你也可以使用我们独家秘制的html程序
+> 可以选择，针对NYT的Daily，还是针对WSJ的WSN。
+> - 针对 NYT的Daily，可以选择：给人名加上##
+> - 针对WSJ的WSN，可以选择：段首的人名黑体
+
+> 然后调用 `md_reader_collect.html`脚本进行 collect 生词生句的处理。
 
 1. 使用程序 <font color=blue>AAA_Daily_WSJ_transcript_tool.html</font> 程序。
 1.1 当你选择 **WSJ:段首 Name:加粗** ：你就可以输入人名，让在段首的这些人名变成粗体。
@@ -165,3 +170,99 @@ python3 scripts/WSJ_bold_leading_speakers.py podcast_WSN.md \
 - 你给出的解释，新起一段，以`[notes]` 作为开头。对`[COLLECTED]`中的单词和表达，分条进行解释。
 
 ---
+
+# podcast的时效问题
+
+> podcast的结构
+> **channels** -> **show** -> **episodes**
+> show 在podcast的中文界面中叫做“节目”
+
+我们会发现，针对我们选定的两个show，每个都包含很多episode。但是有些episode一开始能听，但是过一段时间之后，有些episode没办法收听了。
+
+举例：
+
+> 对于the Daily
+- 工作日，周一到周五：几乎每天一期，都是美东时间早上6点之前。
+- 周六Saturday，有时候没有，但是通常也有常规或者特别期。
+- 周日Sunday，2026年1月开始增加特别版，侧重文化、健康、生活方式等非突发新闻的深度故事，而非日常头条。
+
+有个概念叫：**订阅者单集**
+
+比如：
+the viewer of the war from a Florida Gas Station
+当发布出来的时候，我是能够看到的。但是后来就成为了“订阅者单集”，你在podcast上找到这个episode，但是你也不能听了，因为说“仅限订阅者”。
+
+> 对于 what's news - WSJ podcasts
+发布的频率更高一些
+- 工作日（周一至周五）：每天发布 两次（twice a day），帮助听众快速了解当日重要新闻（商业、金融、全球及政治动态）。
+- 周六：发布 What's News **in Markets（市场回顾）**。
+- 周日：发布 What's News **Sunday（深度探讨/周日特别版）**。
+
+
+U.S. Rescues One of Two Crew Members From Jet Downed in Iran
+
+What’s News in Markets: The War Trade, Megadeals and a Sneaker Slowdown
+
+---
+
+# 使用podcast
+
+下载单集：存储到，已下载-show name文件夹下
+移除下载
+
+前往节目：回到show的主界面
+
+添加到队列：
+
+存储单集：
+取消存储单集：
+
+标记为已播放：
+查看听写文本：
+
+在 macOS 的播客软件里，下面这两个选项意思其实是有细微差别的：
+
+1. 下载单集（Download Episode）
+    * 功能：把这个 episode 的音频文件从网络拉到本地存储，方便离线播放。
+    * 特点：文件通常保存在应用的缓存目录或者指定的下载目录，软件管理，可能会自动删除旧的下载（比如空间不足或自动清理策略）。
+    * 场景：你想在没有网络时听这一集。
+2. 存储单集（Keep Episode / Mark as Saved）
+    * 功能：告诉软件“永久保留这一集”，不受自动清理影响。
+    * 特点：即使软件有自动删除旧下载或只保留最近 N 集的策略，这一集会被保留。
+    * 场景：你想长期保留一年前的某集，随时回顾，不怕被自动删掉。
+
+总结一句话区别：
+
+* 下载 = 可以离线听，但可能会被自动删除；
+* 存储/保留 = 永久保留，不受自动清理影响。
+
+💡技巧：如果你想随时回顾一年前的 episode，最好先下载，再标记存储，这样既能离线听，又不会被系统删掉。
+
+![](./images/download%20and%20save.png)
+好像不准头这个图片，傻逼chatgpt
+
+
+---
+
+播客中只能看到一部分的问题
+主要源于 RSS feed 的默认设置（通常限制显示最近 20 期左右）。 WSJ《What's News》的完整历史存档仍然存在，但需通过特定方式访问。
+为什么只能看到 20 多期？
+
+大部分播客 App（如 Apple Podcasts、Spotify 等）从 RSS feed 拉取数据，而 WSJ 的 feed 默认仅返回最近约 20 集（?limit=20）。
+旧集并未被删除，而是需要手动加载或切换平台才能看到更多内容。
+
+如何访问更早的 episode？
+
+在当前 App 中尝试加载更多
+向下滚动 episode 列表，点击“Load More” 或 “更多剧集”（部分平台支持）。
+使用 App 内搜索功能，输入具体日期（如“2025 年 5 月”）或关键词，通常可调出旧集。
+
+推荐切换到以下平台（存档更完整）
+Podbean：显示更多历史 episode，并有分页加载（“More Episodes”）。
+Spotify 或 Amazon Music：部分用户反馈存档显示更全，可尝试搜索节目后向下浏览。
+WSJ 官网（wsj.com/podcasts/whats-news）：列出近期集数，并提供“Find them wherever you listen to podcasts”的指引。官网还常附 transcript，便于查找。
+
+其他有效方法
+使用 Podcast Addict 或其他高级播客 App：这些 App 支持自定义 RSS 并加载完整存档。
+直接搜索特定日期/事件：在任意平台搜索“WSJ What's News [日期]”或新闻关键词，常能直接找到对应 episode。
+RSS 完整 feed：尝试在支持自定义 feed 的 App 中添加 WSJ 的 Megaphone RSS（https://feeds.megaphone.fm/WSJ4886593505），部分情况下可加载更多。
