@@ -47,6 +47,9 @@ Hey, guys, can you hear me?
 5. 现在我们就可以进一步的处理了！我们可以进行“标记”了。这里要使用的html程序是：**./md_reader_collet.html** 文件进行处理即可。
 6. 你在其中进行阅读，然后标记生词，然后这些词会被收集，同时还可以输出md文件。这个文件可以引入到**chatGPT**中进行处理。
 
+> 使用的脚本是：
+**./scripts/Daily_promote_standalone_lines.py**:
+
 简单来说就是：
 
 ||input files|scripts|notes|
@@ -134,9 +137,10 @@ python3 scripts/WSJ_bold_leading_speakers.py podcast_WSN.md \
 
 > 你也可以使用我们独家秘制的html程序
 
-1. 使用程序 <font color=blue>Daily_WSJ_transcript_tool.html</font> 程序。
+1. 使用程序 <font color=blue>AAA_Daily_WSJ_transcript_tool.html</font> 程序。
 1.1 当你选择 **WSJ:段首 Name:加粗** ：你就可以输入人名，让在段首的这些人名变成粗体。
 1.2 当你选择 **Daily:独立行提升为##标题** ：你就可以选择独立成行的人民，提升其为2级标题。
 
 2. 获得的结构已经更清晰的markdown文件，可以引入到html程序 <font color=blue>md_reader_collect.html</font> 中进行处理，处理完毕就形成了可以投喂给 chatGPT的md文件了。
+
 3. chatGPT的提示词，请参见：<font color=blue>提示词-ChatGPT.md</font>
