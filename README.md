@@ -16,8 +16,6 @@
 5. 选定生词，生成投喂给chatgpt的`md文件`
 
 
-
-
 ---
 
 # NYT Daily 的脚本处理
@@ -53,9 +51,8 @@ Hey, guys, can you hear me?
 
 ||input files|scripts|notes|
 |---|---|---|---|
-|1|Daily网站上下载的Daily脚本md格式，A.md|Daily_promote_standalone_lines.py|给出人名，python脚本把人名都处理成##二级标题，生成新md文件，A_bold.md|
-|2|上一步生成的md文件|md_reader_collect.html||
-
+|1|Daily网站上下载的Daily脚本md格式，`A.md`|Daily_promote_standalone_lines.py|给出人名，python脚本把人名都处理成##二级标题，生成新md文件，`A_bold`.md|
+|2|上一步生成的md文件|md_reader_collect.html|在md_reader_collect中进行浏览，选定生词和用法，进行collect，生成`A_bold_collect.md`|
 
 
 > python脚本`Daily_promote_standalone_lines.py`的调用方法：
@@ -84,7 +81,7 @@ python3 ./scripts/Daily_promote_standalone_lines.py test.md --term "rachel abram
 
 处理完毕了之后，新的markdown文件已经在嘉宾的人名和需要处理的文本处，变成了`二级标题`。
 
-**相对路径 vs 绝对路径**
+> **相对路径 vs 绝对路径**
 那么提醒你一下，关于<u>相对路径</u>和<u>绝对路径</u>的问题：
 上面书写的命令，实在是写起来太麻烦了，可以可以写相对路径。
 - `.` 是当前目录
@@ -96,29 +93,47 @@ python3 ./scripts/Daily_promote_standalone_lines.py test.md --term "rachel abram
 ---
 
 # WJS what's news 脚本处理
-使用的脚本是：`WSJ_bold_leading_speakers.py`:
-- what's 的文本和 Dialy的文本格式不一样，每个md文件中，也是嘉宾的对话。但是人名是在段首，而不是“单独成一行”。
-- 我们依然是引入外部的输入，给出transcript中的人名
-- 然后对于markdown文件中的人名处理是：`**Imam Moise**` 这样的处理方式
-- 生成新的markdown文件，由用户指定。
+你下载下来的transcript是这样字的：
+
+```text
+Alex Ossola: The Pentagon says the growing cost of the Iran war is going to leave them short of money for other operations. Plus, why Bitcoin evangelists are hyped for a different coin called Zcash.
+
+Greg Zuckerman: Bitcoin is just an object of speculation. It's digital gold at this point, and the argument for Zcash is it's digital gold plus because you've got this ability to shield yourself from the government.
+```
+
+脚本的特点是:
+
+1. what's 的文本和 Dialy的文本格式不一样，每个md文件中，也是嘉宾的对话。但是人名是在段首，而不是“单独成一行”。
+2. 我们依然是引入外部的输入，给出transcript中的人名
+3. 然后对于markdown文件中的人名处理是：`**Imam Moise**` 这样的处理方式，将人名变成黑体
+3. 生成新的markdown文件，由用户指定。
+
+
+> 使用的脚本是：
+**./scripts/WSJ_bold_leading_speakers.py**:
 
 具体的使用格式就是：
 ```python
-python3 scripts/WSJ_bold_leading_speakers.py test2.md \
+python3 scripts/WSJ_bold_leading_speakers.py podcast_WSN.md \
   --speaker "Imani Mosise" \
   --speaker "David Sanger" \
-  --output test2.bold.md
+  --output podcast_WSN_bold.md
 ```
-和上面的 `Daily_promote_standalone_lines.py` 基本类似。
 
-- 然后你继续使用<font color=blue> md_reader_collect.md </font>文件，处理你得到的“段首已经是粗体的markdownn文件。
+简单来说就是：
+
+||input files|scripts|notes|
+|---|---|---|---|
+|1|WSJ网站上下载的Daily脚本md格式，`B.md`|WSJ_bold_leading_speakers.py|给出人名，python脚本把人名都处理成**黑体**，生成新md文件，`B_bold`.md|
+|2|上一步生成的md文件|md_reader_collect.html|在md_reader_collect中进行浏览，选定生词和用法，进行collect，生成`B_bold_collect.md`|
 
 
 ---
 
+# 更加牛逼的做法
 
+> 你也可以使用我们独家秘制的html程序
 
-# 你也可以使用我们独家秘制的html程序
 1. 使用程序 <font color=blue>Daily_WSJ_transcript_tool.html</font> 程序。
 1.1 当你选择 **WSJ:段首 Name:加粗** ：你就可以输入人名，让在段首的这些人名变成粗体。
 1.2 当你选择 **Daily:独立行提升为##标题** ：你就可以选择独立成行的人民，提升其为2级标题。
