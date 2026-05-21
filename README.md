@@ -379,6 +379,15 @@ blackhole-2ch安装完了之后在启动台那里是没有明确的app图标的�
 
 然后，你就可以在浏览器中播放你要录音的podcast了，播放完了就可以在 QuickTime Player 保存podcast的音频了。
 
+- QuickTime Player 保存的音频格式是`.m4a`。不过我还是建议，可以通过**DaVinci**再保存成`.mp3`文件，可以节省空间。
+
 ---
 
-good！
+# 录音文件的组织方式
+
+this is highly recommended by us:
+- iCloud Drive 存音频
+- BookPlayer / Bound 在 iPhone 上听
+- VLC 作为备用播放器
+
+---
