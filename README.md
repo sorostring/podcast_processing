@@ -271,3 +271,114 @@ Spotify 或 Amazon Music：部分用户反馈存档显示更全，可尝试搜�
 - 使用 Podcast Addict 或其他高级播客 App：这些 App 支持自定义 RSS 并加载完整存档。
 - 直接搜索特定日期/事件：在任意平台搜索“WSJ What's News [日期]”或新闻关键词，常能直接找到对应 episode。
 - RSS 完整 feed：尝试在支持自定义 feed 的 App 中添加 WSJ 的 Megaphone RSS（https://feeds.megaphone.fm/WSJ4886593505），部分情况下可加载更多。
+
+---
+
+# 音频处理
+
+我们还是使用最原始的办法比较奏效。我们也不费劲去找音频了，反正NYT和WSJ都会在podcast放出来的时候，先公布音频和transcript，那么不如这样：我们直接用iphone对着电脑音箱/其他音箱录，录完了之后到 DaVinci上面降噪处理一下直接存储了直接用就行了，最朴实的做法。
+
+> DaVinci是不能直接输出`.m4a`格式的音频的。主流输出是两个：
+- mp3格式
+- mp4格式，AAC编码
+
+## 参数
+我们的podcast主要是人声，所以我们的<font color=blue>推荐输出设置</font>：
+
+- code：AAC格式输出或者MP3
+- Sample Rate：48 kHz（通常DaVinci会自动按此处理）
+- 轨道数据频率：128 kbps 或 160 kbps
+    - 影响最后音频文件大小， 64kHz也没有特别不能接受
+- Channels：Stereo 或 Mono
+
+
+## 降噪
+DaVinci Resolve（不是DaVinci Resolve Studio）提供的降噪是两种：
+- 在音频的“检查器”中：**AI Dialogue Leveler**
+- 在 fairlight中，找到“特效库”中的**Noise Reduction**。
+    - 你可以试试“采集”功能
+
+你可以自己试着调整，但是不要把人声搞的太夸张，所以你需要做的是微调，因为本来就可以正常听。
+
+## 输出
+输出的时候下面的选项要注意：
+- 每个声道各渲染一条轨道：不要勾选
+- 渲染为分离的音频轨道：不要勾选。防止每个声道都渲染一遍。
+
+---
+
+# 还可以试试“Blackhole”音频处理
+
+这是个大杀器，还是好使呢！~你可以使用blackhole这个程序来完成mac内部的录音。
+
+## 安装blackhole
+
+安装homebrew：
+
+```shell
+brew install blackhole-2ch
+```
+安装完了之后，在Mac上是看不到一个app的，本身这也不是一个app
+可以查看版本
+
+```shell
+brew info blackhole-2ch
+```
+最终返回：
+```shell
+==> blackhole-2ch ✔ (BlackHole 2ch): 0.6.1
+Virtual Audio Driver
+https://existential.audio/blackhole/
+Installed (on request)
+/opt/homebrew/Caskroom/blackhole-2ch/0.6.1 (102.8KB)
+  Installed using the formulae.brew.sh API on 2026-05-21 at 17:52:00
+From: https://github.com/Homebrew/homebrew-cask/blob/HEAD/Casks/b/blackhole-2ch.rb
+==> Requirements
+Required: macOS ✔
+==> Artifacts
+BlackHole2ch-0.6.1.pkg (Pkg)
+==> Caveats
+You must reboot for the installation of blackhole-2ch to take effect.
+
+==> Downloading https://formulae.brew.sh/api/cask/blackhole-2ch.json
+==> Analytics
+install: 11,578 (30 days), 25,234 (90 days), 58,840 (365 days)
+```
+
+## 配置 blackhole-2ch
+
+blackhole-2ch安装完了之后在启动台那里是没有明确的app图标的。
+
+第一步，找到MIDI设置：
+![](./images/MIDI_where.png)
+找这个**音频MIDI设置**
+
+第二步，进行下面的设置
+![](./images/MIDI_configuration.png)
+
+你可以看到我已经设置号了，我新建了一个**聚合设备**，命名它为**podcast录音用**，设置：
+- 外置耳机：勾选。
+    - 漂移校正：不要勾选
+- blackhole 2ch：勾选
+    - 漂移校正：**勾选**
+
+> 我们创建了什么?
+
+我们实际创建了一个通路，播放音频的时候，一个输出是“外置的耳机”，另一个输出是“blackhole 2ch”。
+
+## 使用QuickTime Player直接录音频
+
+- 先设置输出使用我们在MIDI中新添加的“podcast录音用”
+
+![](./images/audio_output.png)
+
+- 打开 QuickTime Player
+文件 - 新建录音，然后选择：
+![](./images/quicktime_interface.png)
+- 注意要选择<u>BlackHole 2ch</u>!
+
+然后，你就可以在浏览器中播放你要录音的podcast了，播放完了就可以在 QuickTime Player 保存podcast的音频了。
+
+---
+
+good！
