@@ -276,7 +276,7 @@ Spotify 或 Amazon Music：部分用户反馈存档显示更全，可尝试搜�
 
 # 音频处理
 
-我们还是使用最原始的办法比较奏效。我们也不费劲去找音频了，反正NYT和WSJ都会在podcast放出来的时候，先公布音频和transcript，那么不如这样：我们直接用iphone对着电脑音箱/其他音箱录，录完了之后到 DaVinci上面降噪处理一下直接存储了直接用就行了，最朴实的做法。
+你可以采取的一个录音采集方式：我们直接用iphone对着电脑音箱/其他音箱录，录完了之后到 DaVinci上面降噪处理一下直接存储了直接用就行了，最朴实的做法。
 
 > DaVinci是不能直接输出`.m4a`格式的音频的。主流输出是两个：
 - mp3格式
@@ -287,10 +287,23 @@ Spotify 或 Amazon Music：部分用户反馈存档显示更全，可尝试搜�
 
 - code：AAC格式输出或者MP3
 - Sample Rate：48 kHz（通常DaVinci会自动按此处理）
+    - sample rate就是“采样率”，根据奈奎斯特采样定理，可记录的最高频率约为采样率的一半（例如 44.1 kHz 可记录最高约 22.05 kHz 的声音，人耳听觉上限约为 20 kHz）。
+    影响：采样率越高，声音越清晰、自然，但文件体积会显著增大。
+    - 48kHz已经是广播和视频的通用音频 sample rate 了。足够用，更别提对于podcast这种音频了。
 - 轨道数据频率：128 kbps 或 160 kbps
-    - 影响最后音频文件大小， 64kHz也没有特别不能接受
-- Channels：Stereo 或 Mono
+    - 影响最后音频文件大小， 其实对于podcast 64kHz也没有特别不能接受
+    - 什么是“轨道数据频率”呢？你可以理解一条轨道就是一个声道。单声道（**Mono**）：1 个轨道；而立体声（**Stereo**）：2 个轨道（左、右）；多声道就是 5.1、7.1这样的描述。我们先介绍“比特率”，比特率是指音频文件在每秒时间内传输或存储的数据量，单位通常为 kbps（kilobits per second，千比特每秒）。有点类似视频中的“码率”：
+        - 比特率 128kbps：每秒使用 128 千比特的数据来描述音频。
+        - 比特率 96kbps：每秒使用 96 千比特的数据来描述音频。
+        - 在立体声（2 个轨道）中，比特率是所有轨道共享的总数据量。例如，一个 128kbps 的立体声 MP3 文件，大约每个声道实际分配到约 64kbps 的数据（但实际编码时并非简单平均分配）。
+        - 那么，**轨道数据频率**，就可以理解为，每个轨道能分配到的数据频率。我们实际在处理podcast的录音文件过程中，我们使用的轨道数据频率一般是<font color=red>96kps 或者 64 kps</font>，其实并没有太大的影响。
+- Channels：**Stereo** 或 **Mono**
 
+> podcast 等人声的参数要求
+64k AAC
+≈
+96~128k MP3
+已经很好了。
 
 ## 降噪
 DaVinci Resolve（不是DaVinci Resolve Studio）提供的降噪是两种：
@@ -312,15 +325,11 @@ DaVinci Resolve（不是DaVinci Resolve Studio）提供的降噪是两种：
 这是个大杀器，还是好使呢！~你可以使用blackhole这个程序来完成mac内部的录音。
 
 ## 安装blackhole
-
-安装homebrew：
-
+homebrew安装：
 ```shell
 brew install blackhole-2ch
 ```
-安装完了之后，在Mac上是看不到一个app的，本身这也不是一个app
-可以查看版本
-
+安装完了之后，在Mac上是看不到一个app的，本身这也不是一个app。可以查看版本：
 ```shell
 brew info blackhole-2ch
 ```
@@ -380,14 +389,130 @@ blackhole-2ch安装完了之后在启动台那里是没有明确的app图标的�
 然后，你就可以在浏览器中播放你要录音的podcast了，播放完了就可以在 QuickTime Player 保存podcast的音频了。
 
 - QuickTime Player 保存的音频格式是`.m4a`。不过我还是建议，可以通过**DaVinci**再保存成`.mp3`文件，可以节省空间。
+    - 转换成mp3格式文件的时候，请使用`轨道数据速率`为：96 Kp/s就可以了，不一定要128。
+
+## 使用 ffmpeg 来把m4a 转换成 mp3
+ffmpeg是一个命令行程序，只能在命令行语境中使用。不过非常便捷。
+你可以使用的命令是：
+
+```shell
+ffmpeg -i input.m4a -codec:a libmp3lame -q:a 2 output.mp3
+└──这是带参数的
+
+ffmpeg -i input.m4a output.mp3
+└──这是不带参数的
+```
+### ffmpeg的参数配置
+我们简单点说，就这个命令：
+`ffmpeg -i input.m4a -codec:a libmp3lame -q:a 2 output.mp3`
+
+其中的参数 `-q:a 2`，就是：VBR（Variable Bit Rate，可变码率）
+
+|参数   |      平均码率 |
+| ---|--- |
+|-q:a 0     |  ~245 kbps |
+| -q:a 2     |  ~190 kbps |
+| -q:a 4     |  ~165 kbps |
+| -q:a 6      | ~115 kbps |
+   
+平均约 190 kbps，有些地方高，有些地方低。音质比固定 192 kbps 更好。
+
+> 如果你想要**固定码率**
+
+```shell
+ffmpeg -i 未命名.m4a -codec:a libmp3lame -b:a 96k output.mp3
+```
+可以试试这个，96k这里根据要求改。
+
+### ffmpeg 命令看音频的信息
+```shell
+ffprobe -hide_banner your_file.mp3
+```
+
+
+```shell
+(base) Aang@Grok2 ~/Documents/POD % ffprobe -hide_banner Daily_20260529_StranderIn.mp3
+Input #0, mp3, from 'Daily_20260529_StranderIn.mp3':
+  Metadata:
+    major_brand     : M4A 
+    minor_version   : 0
+    compatible_brands: M4A isommp42
+    iTunSMPB        :  00000000 00000840 00000000 0000000004D0FBC0 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+    encoder         : Lavf62.3.100
+  Duration: 00:30:32.31, start: 0.025057, bitrate: 96 kb/s
+  Stream #0:0: Audio: mp3 (mp3float), 44100 Hz, stereo, fltp, 96 kb/s, start 0.025057
+    Metadata:
+      encoder         : Lavc62.11
+
+```
 
 ---
 
-# 录音文件的组织方式
+# SUMMARY
 
-this is highly recommended by us:
-- iCloud Drive 存音频
-- BookPlayer / Bound 在 iPhone 上听
-- VLC 作为备用播放器
+经过了几次迭代，我们现在总结了我们的处理方式：
 
----
+## 1. 收集mp3
+先根据需要，把音频采集好，然后转成`mp3`格式音频，并命名。
+- whatsnews_20261008_GodSaveUs.mp3
+    - whatsnews_20261008_InMarket.mp3
+- Daily_20261008_GodSaveUS.mp3
+
+这些名字，接下来的markdown文件或者是html文件也要同样使用。
+
+## 2. 粘贴 TRANSCRIPT 文本
+新建markdown文件，从官网上把transcript扒下来，直接粘贴到新建的空白 markdown文件中，不过不要单纯的粘贴了什么都不管了，我们还要进行修改：
+- 合并一些段落，官方脚本中会有多余的分段，合并掉
+- 删掉一些没有必要的文字，比如 [xxx music]这样的描写，这些没有必要
+- `archived recording 1`这样的描述，后面常常是其他人说的话。这句 archived recording x，也可删除掉，把画外音都集中在一起成段即可。
+
+我们最后要达成的第一版本的 markdown文件，我们称呼 **`md文本1`**。**`md文本1`** 的要求是：
+- 以“演讲者”为一个语义的开始，后面跟一段，或者两段以上的文本，段和段中间，用**一个空白行**分隔
+- 每个演讲者所代表的“语义单元”之间，也用**一个空白行**分隔。
+- **<font color=blue>轻易不要出现两个空白行</font>**
+
+## 3. 黑体或者二级标题处理
+
+使用 `AAA_Daily_WSJ_transcript_tool.html` 程序处理，提升人名的二级标题（针对Daily），或者段落开始的人名（针对whatsnews）。
+生成md文件：**`md文本2`**
+
+## 4. chatgpt加中文
+
+**`md文本2`** 给chatgpt处理，提示词：
+
+start of 提示词 》
+
+本项目针对markdown文件进行处理，然后输出新的markdown文件。
+markdown文件是美国主流媒体的podcast的transcript，我已经做了整理，很适合进行处理。核心目的是把markdown文件中的每段加上中文。
+
+markdown文件中的各级标题，即以 # 或者 ## 或者 ### 标出的段落，不需要处理，原文复制即可。只有正文部分需要翻译成中文。
+
+需要被翻译成中文的每个段落，是和前后两个段落之间以一个空白行相分隔。你需要处理的是，读入一个段落，然后紧接着另起一行，开始输入中文翻译，不要紧接着本行的英文翻译。
+
+中文翻译结束后，原有的空白行保留，然后进入到下一个段落的处理。
+
+《 end of 提示词
+
+这是我写到项目“podcast-插入中文”的项目设置中的 project setting 信息。最终生成的新的md文件我们称作 **`md文本3`**。
+
+## 5. html程序的COLLECT处理
+
+打开html处理程序 `md_reader_collect.html`，把上述的 **`md文本3`** 输入进来。
+使用阅读器，把习惯性的文件通过 **COLLECT**功能选中。
+生成新的markdown文件 **`md文本4`**。
+
+## 6. 导入chatgpt生成final
+
+导入到chatgpt project with name of `podcast-collect处理`，最终生成：**`md文本5`**。
+而 **`md文本5`**，才是我们最终输入到另一个 html viewer 程序的文件。
+
+## 小结
+
+|md文件|如何形成,how we get it|
+|---|---|
+|md文本1|网站上扒下来，第一遍清理，清理掉多余空格等|
+|md文本2|AAA_Daily_WSJ_transcript_tool.html处理，提升人名级别或者人名黑体|
+|md文本3|使用 chatgpt 第一遍处理，“podcast-插入中文”处理得到|
+|md文本4|md_reader_collect.html处理后，COLLECT你要选的词和句，进而得到|
+|md文本5|使用 chatgpt 第二遍处理，“podcast-collect处理”得到|
+

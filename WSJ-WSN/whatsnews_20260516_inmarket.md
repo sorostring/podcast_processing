@@ -57,9 +57,7 @@ Speaker 3: Chip makers bounced back from yesterday's stumble.
 
 ---
 
-## 整体翻译
-
-# What's News in Markets：Clarity Act、芯片股回落、Klarna 转向
+Chinese Version
 
 **Jack Pitcher：** 各位听众好，今天是 5 月 16 日，星期六。我是《华尔街日报》的 Jack Pitcher，这里是 *What's News in Markets*。我们会回顾本周股市中最大的价格波动，以及推动这些波动的新闻。我们开始吧。
 
